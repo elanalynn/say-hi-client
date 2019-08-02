@@ -15,13 +15,14 @@ import {
   IonMenuButton,
   IonTitle,
   IonToolbar,
-  IonRouterLink
+  IonRouterLink,
+  IonRow
   } from '@ionic/react';
 import { person } from 'ionicons/icons';
 import React, { useEffect, useState } from 'react';
 import { connect } from 'react-redux'
 import axios from 'axios';
-import './Home.css';
+import '../styles/home.scss';
 
 const ConnectedHomePage: React.FunctionComponent = () => {
   const [ users, setUsers ] = useState([])
@@ -41,12 +42,14 @@ const ConnectedHomePage: React.FunctionComponent = () => {
           <IonTitle>Say Hi!</IonTitle>
         </IonToolbar>
       </IonHeader>
-      <IonContent class="">
-        <IonRouterLink href="search">
-          <IonButton color="primary" class="">
-            Meet a Guilder!
-          </IonButton>
-        </IonRouterLink>
+      <IonContent>
+        <IonRow class="ion-justify-content-center">
+          <IonRouterLink href="search">
+            <IonButton color="primary" class="ion-padding button-big">
+              Meet a Guilder!
+            </IonButton>
+          </IonRouterLink>
+        </IonRow>
         <IonCard class="welcome-card">
           <img src="/assets/hero_travis.png" alt=""/>
           <IonCardHeader>

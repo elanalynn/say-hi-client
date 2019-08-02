@@ -6,7 +6,6 @@ const initialState = {
 
 function rootReducer(state = initialState, action: any) {
   if (action.type === SET_USERS) {
-    console.log('hi', state)
     return Object.assign({}, state, {
       users: state.users = action.payload
     });
