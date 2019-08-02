@@ -25,6 +25,7 @@ import axios from 'axios';
 import '../styles/home.scss';
 
 const ConnectedHomePage: React.FunctionComponent = () => {
+  // TODO: Make redux work because doing this in every file is stupid
   const [ users, setUsers ] = useState([])
   useEffect(() => {
     if (!users.length) {

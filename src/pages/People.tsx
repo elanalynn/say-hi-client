@@ -1,20 +1,26 @@
 import {
   IonButtons,
-  IonCard,
-  IonCardContent,
-  IonCardHeader,
-  IonCardSubtitle,
-  IonCardTitle,
   IonContent,
   IonHeader,
   IonMenuButton,
   IonTitle,
-  IonToolbar
+  IonToolbar,
+  IonList,
+  IonItem,
+  IonIcon
   } from '@ionic/react';
-import React from 'react';
-import './Home.css';
+import { person } from 'ionicons/icons'
+import React, { useEffect, useState } from 'react';
+import axios from 'axios';
+import '../styles/people.scss';
 
 const PeoplePage: React.FunctionComponent = () => {
+  const [ users, setUsers ] = useState([])
+  useEffect(() => {
+    if (!users.length) {
+      axios.get('http://localhost:3000/users').then(res => setUsers(res.data))
+    }
+  })
   return (
     <>
       <IonHeader>
@@ -26,14 +32,16 @@ const PeoplePage: React.FunctionComponent = () => {
         </IonToolbar>
       </IonHeader>
       <IonContent>
-        <IonCard class="welcome-card">
-          <img src="/assets/shapes.svg" alt=""/>
-          <IonCardHeader>
-            <IonCardSubtitle>Make Connections!</IonCardSubtitle>
-            <IonCardTitle>You've met...</IonCardTitle>
-            <IonCardContent>12/302 Guilders</IonCardContent>
-          </IonCardHeader>
-        </IonCard>
+        <IonList>
+          {
+            users.map((user: any) => (
+                    <IonItem key={user.id}>
+                      <IonIcon slot="start" color="dark" icon={person} />
+                      {user.first_name} {user.last_name}
+                    </IonItem>
+            ))
+          }
+        </IonList>
       </IonContent>
     </>
   );
