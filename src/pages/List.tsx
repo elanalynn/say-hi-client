@@ -10,7 +10,7 @@ const ListPage: React.FunctionComponent = () => {
           <IonButtons slot="start">
             <IonMenuButton />
           </IonButtons>
-          <IonTitle>List</IonTitle>
+          <IonTitle>All Guilders</IonTitle>
         </IonToolbar>
       </IonHeader>
 

@@ -1,4 +1,5 @@
 import {
+  IonButton,
   IonButtons,
   IonCard,
   IonCardContent,
@@ -14,9 +15,10 @@ import {
   IonListHeader,
   IonMenuButton,
   IonTitle,
-  IonToolbar
+  IonToolbar,
+  IonRouterLink
   } from '@ionic/react';
-import { book, build, colorFill, grid } from 'ionicons/icons';
+import { person } from 'ionicons/icons';
 import React from 'react';
 import './Home.css';
 
@@ -28,43 +30,38 @@ const HomePage: React.FunctionComponent = () => {
           <IonButtons slot="start">
             <IonMenuButton />
           </IonButtons>
-          <IonTitle>Home</IonTitle>
+          <IonTitle>Say Hi!</IonTitle>
         </IonToolbar>
       </IonHeader>
-      <IonContent>
+      <IonContent class="">
+        <IonRouterLink href="search">
+          <IonButton color="primary" class="">
+            Meet a Guilder!
+          </IonButton>
+        </IonRouterLink>
         <IonCard class="welcome-card">
-          <img src="/assets/shapes.svg" alt=""/>
+          <img src="/assets/hero_travis.png" alt=""/>
           <IonCardHeader>
-            <IonCardSubtitle>Get Started</IonCardSubtitle>
-            <IonCardTitle>Welcome to Ionic</IonCardTitle>
+            <IonCardSubtitle>Make Connections!</IonCardSubtitle>
+            <IonCardTitle>You've met...</IonCardTitle>
+            <IonCardContent>12/302 Guilders</IonCardContent>
           </IonCardHeader>
-          <IonCardContent>
-            <p>
-              Now that your app has been created, you'll want to start building out features and
-              components. Check out some of the resources below for next steps.
-            </p>
-          </IonCardContent>
         </IonCard>
-
         <IonList lines="none">
           <IonListHeader>
-            <IonLabel>Resources</IonLabel>
+            <IonLabel>Latest Connections</IonLabel>
           </IonListHeader>
           <IonItem href="https://ionicframework.com/docs/" target="_blank">
-            <IonIcon slot="start" color="medium" icon={book} />
-            <IonLabel>Ionic Documentation</IonLabel>
+            <IonIcon slot="start" color="medium" icon={person} />
+            <IonLabel>Elana Kopelevich</IonLabel>
           </IonItem>
-          <IonItem href="https://ionicframework.com/docs/building/scaffolding" target="_blank">
-            <IonIcon slot="start" color="medium" icon={build} />
-            <IonLabel>Scaffold Out Your App</IonLabel>
+          <IonItem href="https://ionicframework.com/docs/" target="_blank">
+            <IonIcon slot="start" color="medium" icon={person} />
+            <IonLabel>Elana Kopelevich</IonLabel>
           </IonItem>
-          <IonItem href="https://ionicframework.com/docs/layout/structure" target="_blank">
-            <IonIcon slot="start" color="medium" icon={grid} />
-            <IonLabel>Change Your App Layout</IonLabel>
-          </IonItem>
-          <IonItem href="https://ionicframework.com/docs/theming/basics" target="_blank">
-            <IonIcon slot="start" color="medium" icon={colorFill} />
-            <IonLabel>Theme Your App</IonLabel>
+          <IonItem href="https://ionicframework.com/docs/" target="_blank">
+            <IonIcon slot="start" color="medium" icon={person} />
+            <IonLabel>Elana Kopelevich</IonLabel>
           </IonItem>
         </IonList>
       </IonContent>

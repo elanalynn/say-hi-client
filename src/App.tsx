@@ -1,5 +1,6 @@
 import React from 'react';
 import { Redirect, Route } from 'react-router-dom';
+import axios from 'axios';
 import { IonApp, IonPage, IonRouterOutlet, IonSplitPane } from '@ionic/react';
 import { IonReactRouter } from '@ionic/react-router';
 import { AppPage } from './declarations';
@@ -7,7 +8,10 @@ import { AppPage } from './declarations';
 import Menu from './components/Menu';
 import Home from './pages/Home';
 import List from './pages/List';
-import { home, list } from 'ionicons/icons';
+import Search from './pages/Search';
+import Profile from './pages/Profile';
+import People from './pages/People';
+import { home, list, person, contacts, search } from 'ionicons/icons';
 
 /* Core CSS required for Ionic components to work properly */
 import '@ionic/core/css/core.css';
@@ -27,32 +31,61 @@ import '@ionic/core/css/display.css';
 
 const appPages: AppPage[] = [
   {
-    title: 'Home',
-    url: '/home',
-    icon: home
+    title: 'Search',
+    url: '/search',
+    icon: search
+  },
+  {
+    title: 'Profile',
+    url: '/profile',
+    icon: person
   },
   {
     title: 'List',
-    url: '/home/list',
+    url: '/list',
     icon: list
+  },
+  {
+    title: 'People',
+    url: '/people',
+    icon: contacts
+  },
+  {
+    title: 'Home',
+    url: '/home',
+    icon: home
   }
 ];
 
-const App: React.FunctionComponent = () => (
-  <IonApp>
+const App: React.FunctionComponent = () => {
+  getPeople();
+
+  return (
+    <IonApp>
     <IonReactRouter>
       <IonSplitPane contentId="main">
         <Menu appPages={appPages} />
         <IonPage id="main">
           <IonRouterOutlet>
             <Route path="/:tab(home)" component={Home} exact={true} />
-            <Route path="/:tab(home)/list" component={List} exact={true} />
-            <Route exact path="/" render={() => <Redirect to="/home" />} />
+            <Route path="/search" component={Search} exact={true} />
+            <Route path="/list" component={List} exact={true} />
+            <Route path="/profile" component={Profile} exact={true} />
+            <Route path="/people" component={People} exact={true} />
+            <Route path="/" render={() => <Redirect to="/home" />} />
           </IonRouterOutlet>
         </IonPage>
       </IonSplitPane>
     </IonReactRouter>
   </IonApp>
-);
+  )
+};
+
+const getPeople = () => {
+  axios.get('http://localhost:3000/users')
+  .then(users => {
+    console.log('users', users)
+  })
+}
 
 export default App;
