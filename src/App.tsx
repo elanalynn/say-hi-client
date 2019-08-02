@@ -1,10 +1,12 @@
 import React from 'react';
 import { Redirect, Route } from 'react-router-dom';
-import axios from 'axios';
+import { connect } from 'react-redux';
 import { IonApp, IonPage, IonRouterOutlet, IonSplitPane } from '@ionic/react';
 import { IonReactRouter } from '@ionic/react-router';
 import { AppPage } from './declarations';
+import { setUsers } from './actions/index'
 
+// TODO: Maybe move to barrel file?
 import Menu from './components/Menu';
 import Home from './pages/Home';
 import List from './pages/List';
@@ -21,6 +23,7 @@ import '@ionic/core/css/normalize.css';
 import '@ionic/core/css/structure.css';
 import '@ionic/core/css/typography.css';
 
+// TODO: Decide what can be removed here
 /* Optional CSS utils that can be commented out */
 import '@ionic/core/css/padding.css';
 import '@ionic/core/css/float-elements.css';
@@ -30,62 +33,43 @@ import '@ionic/core/css/flex-utils.css';
 import '@ionic/core/css/display.css';
 
 const appPages: AppPage[] = [
-  {
-    title: 'Search',
-    url: '/search',
-    icon: search
-  },
-  {
-    title: 'Profile',
-    url: '/profile',
-    icon: person
-  },
-  {
-    title: 'List',
-    url: '/list',
-    icon: list
-  },
-  {
-    title: 'People',
-    url: '/people',
-    icon: contacts
-  },
-  {
-    title: 'Home',
-    url: '/home',
-    icon: home
-  }
+  { title: 'Search', url: '/search', icon: search },
+  { title: 'Profile', url: '/profile', icon: person },
+  { title: 'List', url: '/list', icon: list },
+  { title: 'People', url: '/people', icon: contacts },
+  { title: 'Home', url: '/home', icon: home }
 ];
 
-const App: React.FunctionComponent = () => {
-  getPeople();
-
+const ConnectedApp: React.FunctionComponent = () => {
   return (
     <IonApp>
-    <IonReactRouter>
-      <IonSplitPane contentId="main">
-        <Menu appPages={appPages} />
-        <IonPage id="main">
-          <IonRouterOutlet>
-            <Route path="/:tab(home)" component={Home} exact={true} />
-            <Route path="/search" component={Search} exact={true} />
-            <Route path="/list" component={List} exact={true} />
-            <Route path="/profile" component={Profile} exact={true} />
-            <Route path="/people" component={People} exact={true} />
-            <Route path="/" render={() => <Redirect to="/home" />} />
-          </IonRouterOutlet>
-        </IonPage>
-      </IonSplitPane>
-    </IonReactRouter>
-  </IonApp>
+      <IonReactRouter>
+        <IonSplitPane contentId="main">
+          <Menu appPages={appPages} />
+          <IonPage id="main">
+            <IonRouterOutlet>
+              <Route path="/:tab(home)" component={Home} exact={true} />
+              <Route path="/search" component={Search} exact={true} />
+              <Route path="/list" component={List} exact={true} />
+              <Route path="/profile" component={Profile} exact={true} />
+              <Route path="/people/:id" component={Profile} exact={true} />
+              <Route path="/people" component={People} exact={true} />
+              <Route path="/" render={() => <Redirect to="/home" />} />
+            </IonRouterOutlet>
+          </IonPage>
+        </IonSplitPane>
+      </IonReactRouter>
+    </IonApp>
   )
 };
 
-const getPeople = () => {
-  axios.get('http://localhost:3000/users')
-  .then(users => {
-    console.log('users', users)
-  })
-}
+const mapDispatchToProps = (dispatch: any) => ({
+  setUsers: (payload: any) => dispatch(setUsers(payload))
+})
+
+const App = connect(
+  state => state,
+  mapDispatchToProps
+)(ConnectedApp);
 
 export default App;

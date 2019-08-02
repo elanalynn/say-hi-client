@@ -2,14 +2,13 @@ import {
   IonButton,
   IonButtons,
   IonCard,
-  IonCardContent,
+  IonItem,
   IonCardHeader,
   IonCardSubtitle,
   IonCardTitle,
   IonContent,
   IonHeader,
   IonIcon,
-  IonItem,
   IonLabel,
   IonList,
   IonListHeader,
@@ -19,10 +18,20 @@ import {
   IonRouterLink
   } from '@ionic/react';
 import { person } from 'ionicons/icons';
-import React from 'react';
+import React, { useEffect, useState } from 'react';
+import { connect } from 'react-redux'
+import axios from 'axios';
 import './Home.css';
 
-const HomePage: React.FunctionComponent = () => {
+const ConnectedHomePage: React.FunctionComponent = () => {
+  const [ users, setUsers ] = useState([])
+  console.log('users', users)
+  useEffect(() => {
+    if (!users.length) {
+      axios.get('http://localhost:3000/users').then(res => setUsers(res.data))
+    }
+  })
+
   return (
     <>
       <IonHeader>
@@ -42,31 +51,31 @@ const HomePage: React.FunctionComponent = () => {
         <IonCard class="welcome-card">
           <img src="/assets/hero_travis.png" alt=""/>
           <IonCardHeader>
-            <IonCardSubtitle>Make Connections!</IonCardSubtitle>
-            <IonCardTitle>You've met...</IonCardTitle>
-            <IonCardContent>12/302 Guilders</IonCardContent>
+            <IonCardTitle>Make Connections!</IonCardTitle>
+            <IonCardSubtitle>You've connected with... 12/{users.length} Guilders</IonCardSubtitle>
           </IonCardHeader>
         </IonCard>
         <IonList lines="none">
           <IonListHeader>
             <IonLabel>Latest Connections</IonLabel>
           </IonListHeader>
-          <IonItem href="https://ionicframework.com/docs/" target="_blank">
-            <IonIcon slot="start" color="medium" icon={person} />
-            <IonLabel>Elana Kopelevich</IonLabel>
-          </IonItem>
-          <IonItem href="https://ionicframework.com/docs/" target="_blank">
-            <IonIcon slot="start" color="medium" icon={person} />
-            <IonLabel>Elana Kopelevich</IonLabel>
-          </IonItem>
-          <IonItem href="https://ionicframework.com/docs/" target="_blank">
-            <IonIcon slot="start" color="medium" icon={person} />
-            <IonLabel>Elana Kopelevich</IonLabel>
-          </IonItem>
+          { 
+            users.map((user: any) => {
+              return (
+                <IonRouterLink href={`people/${user.id}`} key={user.id}>
+                  <IonItem>
+                    <IonIcon slot="start" color="dark" icon={person} />
+                    <IonLabel>{user.first_name} {user.last_name}</IonLabel>
+                    <IonLabel>{user.department}</IonLabel>
+                  </IonItem>
+                </IonRouterLink>
+              )
+            })
+          }
         </IonList>
       </IonContent>
     </>
   );
 };
 
-export default HomePage;
+export default connect((users: any) => users)(ConnectedHomePage);
