@@ -9,11 +9,10 @@ import { setUsers } from './actions/index'
 // TODO: Maybe move to barrel file?
 import Menu from './components/Menu';
 import Home from './pages/Home';
-import List from './pages/List';
 import Search from './pages/Search';
 import Profile from './pages/Profile';
 import People from './pages/People';
-import { home, list, person, contacts, search } from 'ionicons/icons';
+import { home, person, contacts, search } from 'ionicons/icons';
 
 /* Core CSS required for Ionic components to work properly */
 import '@ionic/core/css/core.css';
@@ -35,7 +34,6 @@ import '@ionic/core/css/display.css';
 const appPages: AppPage[] = [
   { title: 'Search', url: '/search', icon: search },
   { title: 'Profile', url: '/profile', icon: person },
-  { title: 'List', url: '/list', icon: list },
   { title: 'People', url: '/people', icon: contacts },
   { title: 'Home', url: '/home', icon: home }
 ];
@@ -50,7 +48,6 @@ const ConnectedApp: React.FunctionComponent = () => {
             <IonRouterOutlet>
               <Route path="/:tab(home)" component={Home} exact={true} />
               <Route path="/search" component={Search} exact={true} />
-              <Route path="/list" component={List} exact={true} />
               <Route path="/profile" component={Profile} exact={true} />
               <Route path="/people/:id" component={Profile} exact={true} />
               <Route path="/people" component={People} exact={true} />

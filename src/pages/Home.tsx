@@ -25,7 +25,6 @@ import './Home.css';
 
 const ConnectedHomePage: React.FunctionComponent = () => {
   const [ users, setUsers ] = useState([])
-  console.log('users', users)
   useEffect(() => {
     if (!users.length) {
       axios.get('http://localhost:3000/users').then(res => setUsers(res.data))
