@@ -22,7 +22,7 @@ const Menu: React.FunctionComponent<MenuProps> = ({ appPages }) => (
   <IonMenu contentId="main">
     <IonHeader>
       <IonToolbar>
-        <IonTitle>Menu</IonTitle>
+        <IonTitle>Say Hi!</IonTitle>
       </IonToolbar>
     </IonHeader>
     <IonContent>
