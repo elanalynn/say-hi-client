@@ -1,17 +1,13 @@
 import {
-  IonButtons,
   IonContent,
-  IonHeader,
-  IonMenuButton,
-  IonTitle,
-  IonToolbar,
   IonList,
   IonItem,
   IonIcon
-  } from '@ionic/react';
+} from '@ionic/react';
 import { person } from 'ionicons/icons'
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
+import { Header } from '../components/Header'
 import '../styles/people.scss';
 
 const PeoplePage: React.FunctionComponent = () => {
@@ -23,14 +19,7 @@ const PeoplePage: React.FunctionComponent = () => {
   })
   return (
     <>
-      <IonHeader>
-        <IonToolbar>
-          <IonButtons slot="start">
-            <IonMenuButton />
-          </IonButtons>
-          <IonTitle>Say Hi!</IonTitle>
-        </IonToolbar>
-      </IonHeader>
+      <Header title="People" />
       <IonContent>
         <IonList>
           {

@@ -1,10 +1,5 @@
 import {
-  IonButtons,
   IonContent,
-  IonHeader,
-  IonMenuButton,
-  IonTitle,
-  IonToolbar,
   IonInput,
   IonItem,
   IonLabel,
@@ -12,20 +7,13 @@ import {
   IonRow
 } from '@ionic/react';
 import React from 'react';
+import { Header } from '../components/Header'
 import Question from '../components/Question'
 
 const ProfilePage: React.FunctionComponent = () => {
   return (
     <>
-      <IonHeader>
-        <IonToolbar>
-          <IonButtons slot="start">
-            <IonMenuButton />
-          </IonButtons>
-          <IonTitle>Profile</IonTitle>
-        </IonToolbar>
-      </IonHeader>
-
+      <Header title="Profile" />
       <IonContent>
         <IonItem>
           <IonLabel position="floating" color="medium" class="ion-padding-bottom">First Name</IonLabel>
@@ -51,7 +39,7 @@ const ProfilePage: React.FunctionComponent = () => {
           <Question questionOrder="Two"/>
           <Question questionOrder="Three"/>
         </IonItem>
-      </IonContent>
+        </IonContent>
     </>
   );
 };

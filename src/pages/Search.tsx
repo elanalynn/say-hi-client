@@ -1,14 +1,9 @@
 import {
-  IonButtons,
   IonCard,
   IonCardHeader,
   IonCardTitle,
   IonCardSubtitle,
   IonContent,
-  IonHeader,
-  IonMenuButton,
-  IonTitle,
-  IonToolbar,
   IonSearchbar,
   IonLabel,
   IonRow,
@@ -17,6 +12,7 @@ import {
 import React, { useEffect, useState } from 'react';
 import { connect } from 'react-redux'
 import axios from 'axios'
+import { Header } from '../components/Header'
 import '../styles/search.scss';
 
 const ConnectedSearchPage: React.FunctionComponent = () => {
@@ -59,16 +55,7 @@ const ConnectedSearchPage: React.FunctionComponent = () => {
 
   return (
     <>
-      {/* TODO: Extract this header into a component */}
-      <IonHeader>
-        <IonToolbar>
-          <IonButtons slot="start">
-            <IonMenuButton />
-          </IonButtons>
-          <IonTitle>Say Hi!</IonTitle>
-        </IonToolbar>
-      </IonHeader>
-
+      <Header title="Search" />
       <IonContent>
         <IonCard>
           <IonCardHeader>

@@ -1,20 +1,15 @@
 import {
   IonButton,
-  IonButtons,
   IonCard,
   IonItem,
   IonCardHeader,
   IonCardSubtitle,
   IonCardTitle,
   IonContent,
-  IonHeader,
   IonIcon,
   IonLabel,
   IonList,
   IonListHeader,
-  IonMenuButton,
-  IonTitle,
-  IonToolbar,
   IonRouterLink,
   IonRow
   } from '@ionic/react';
@@ -22,6 +17,7 @@ import { person } from 'ionicons/icons';
 import React, { useEffect, useState } from 'react';
 import { connect } from 'react-redux'
 import axios from 'axios';
+import { Header } from '../components/Header'
 import '../styles/home.scss';
 
 const ConnectedHomePage: React.FunctionComponent = () => {
@@ -35,14 +31,7 @@ const ConnectedHomePage: React.FunctionComponent = () => {
 
   return (
     <>
-      <IonHeader>
-        <IonToolbar>
-          <IonButtons slot="start">
-            <IonMenuButton />
-          </IonButtons>
-          <IonTitle>Say Hi!</IonTitle>
-        </IonToolbar>
-      </IonHeader>
+      <Header title="Say Hi" />
       <IonContent>
         <IonRow class="ion-justify-content-center">
           <IonRouterLink href="search">
