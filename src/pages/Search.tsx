@@ -1,17 +1,13 @@
 import {
-  IonCard,
-  IonCardHeader,
-  IonCardTitle,
-  IonCardSubtitle,
   IonContent,
-  IonSearchbar,
   IonLabel,
-  IonRow,
-  IonRouterLink
+  IonSearchbar,
+  IonRow
   } from '@ionic/react';
 import React, { useState } from 'react';
 import { connect } from 'react-redux'
 import { Header } from '../components/Header'
+import { UserCard } from '../components/UserCard'
 import '../styles/search.scss';
 
 const ConnectedSearchPage: React.FunctionComponent<{users: any}> = ({users}) => {
@@ -25,43 +21,29 @@ const ConnectedSearchPage: React.FunctionComponent<{users: any}> = ({users}) => 
     })
   }
 
-  const matches = (user: any, input: string) => {
-    if (
+  const matches = (user: any, input: string): any => {
+    const match: boolean = (
       user.first_name.toLowerCase().includes(input.toLowerCase()) ||
       user.last_name.toLowerCase().includes(input.toLowerCase())
-    ) {
-      return user
-    }
-  }
+    )
 
-  const UserCard: React.FunctionComponent<{user: any}> = ({user}) => (
-    <IonRouterLink href={`profile/${user.id}`}>
-      <IonCard>
-        <IonCardHeader>
-          <IonCardTitle>{user.first_name} {user.last_name}</IonCardTitle>
-          <IonCardSubtitle>{user.title}, {user.department}</IonCardSubtitle>
-          <IonLabel>Slack name: @whoever</IonLabel>
-        </IonCardHeader>
-      </IonCard>
-    </IonRouterLink>
-  )
+    return match && user
+  }
 
   return (
     <>
       <Header title="Search" />
       <IonContent>
-        <IonCard>
-          <IonCardHeader>
-            <IonCardSubtitle>Find by Name</IonCardSubtitle>
-            <IonSearchbar onKeyUp={event => handleSubmit(event, users)}>First or Last</IonSearchbar>
-          </IonCardHeader>
-        </IonCard>
+        <IonRow>
+          <IonLabel position="stacked">Find by Name</IonLabel>
+          <IonSearchbar onKeyUp={event => handleSubmit(event, users)} />
+        </IonRow>
         <IonRow>
           { searchResults && <UserCard user={searchResults} /> }
         </IonRow>
       </IonContent>
     </>
-  );
-};
+  )
+}
 
-export const SearchPage = connect((users: any) => users)(ConnectedSearchPage);
+export const SearchPage = connect((users: any) => users)(ConnectedSearchPage)

@@ -1,22 +1,18 @@
 import {
   IonButton,
-  IonCard,
-  IonItem,
-  IonCardHeader,
-  IonCardSubtitle,
-  IonCardTitle,
   IonContent,
-  IonIcon,
   IonLabel,
   IonList,
   IonListHeader,
   IonRouterLink,
-  IonRow
-  } from '@ionic/react'
-import { person } from 'ionicons/icons'
+  IonRow,
+  IonText,
+  IonTitle
+} from '@ionic/react'
 import React from 'react'
 import { connect } from 'react-redux'
 import { Header } from '../components/Header'
+import { UserListItem } from '../components/UserListItem'
 import '../styles/home.scss'
 
 const ConnectedHomePage: React.FunctionComponent<{users: any}> = ({users}) => {
@@ -26,35 +22,21 @@ const ConnectedHomePage: React.FunctionComponent<{users: any}> = ({users}) => {
       <IonContent>
         <IonRow class="ion-justify-content-center">
           <IonRouterLink href="search">
-            <IonButton color="primary" class="ion-padding button-big">
-              Meet a Guilder!
+            <IonButton color="primary" class="button-big">
+              Get Started
             </IonButton>
           </IonRouterLink>
         </IonRow>
-        <IonCard>
+        <IonRow class="ion-margin ion-justify-content-center">
           <img src="/assets/hero_travis.png" alt=""/>
-          <IonCardHeader>
-            <IonCardTitle>Make Connections!</IonCardTitle>
-            <IonCardSubtitle>You've connected with... 12/{users.length} Guilders</IonCardSubtitle>
-          </IonCardHeader>
-        </IonCard>
-        <IonList lines="none">
+          <IonText class="ion-margin">Make Connections!</IonText>
+          { !!users.length && <IonText>You've connected with... 12/{users.length} Guilders</IonText>}
+        </IonRow>
+        <IonList>
           <IonListHeader>
             <IonLabel>Latest Connections</IonLabel>
           </IonListHeader>
-          { 
-            users.map((user: any) => {
-              return (
-                <IonRouterLink href={`people/${user.id}`} key={user.id}>
-                  <IonItem>
-                    <IonIcon slot="start" color="dark" icon={person} />
-                    <IonLabel>{user.first_name} {user.last_name}</IonLabel>
-                    <IonLabel>{user.department}</IonLabel>
-                  </IonItem>
-                </IonRouterLink>
-              )
-            })
-          }
+          { users.map((user: any) => <UserListItem user={user} key={user.id}/>) }
         </IonList>
       </IonContent>
     </>
