@@ -9,20 +9,13 @@ import {
   IonRow,
   IonRouterLink
   } from '@ionic/react';
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { connect } from 'react-redux'
-import axios from 'axios'
 import { Header } from '../components/Header'
 import '../styles/search.scss';
 
-const ConnectedSearchPage: React.FunctionComponent = () => {
-  const [ users, setUsers ] = useState([])
+const ConnectedSearchPage: React.FunctionComponent<{users: any}> = ({users}) => {
   const [ searchResults, setSearchResults ] = useState()
-  useEffect(() => {
-    if (!users.length) {
-      axios.get('http://localhost:3000/users').then(res => setUsers(res.data))
-    }
-  })
 
   const handleSubmit = (event: any, users: any) => {
     users.forEach((user: any) => {
@@ -42,7 +35,7 @@ const ConnectedSearchPage: React.FunctionComponent = () => {
   }
 
   const UserCard: React.FunctionComponent<{user: any}> = ({user}) => (
-    <IonRouterLink href={`people${user.id}`}>
+    <IonRouterLink href={`profile/${user.id}`}>
       <IonCard>
         <IonCardHeader>
           <IonCardTitle>{user.first_name} {user.last_name}</IonCardTitle>
@@ -71,4 +64,4 @@ const ConnectedSearchPage: React.FunctionComponent = () => {
   );
 };
 
-export default connect((users: any) => users)(ConnectedSearchPage);
+export const SearchPage = connect((users: any) => users)(ConnectedSearchPage);

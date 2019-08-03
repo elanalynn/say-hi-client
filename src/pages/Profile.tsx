@@ -5,12 +5,14 @@ import {
   IonLabel,
   IonText,
   IonRow
-} from '@ionic/react';
-import React from 'react';
+} from '@ionic/react'
+import React from 'react'
+import { connect } from 'react-redux'
 import { Header } from '../components/Header'
 import Question from '../components/Question'
+import '../styles/profile.scss'
 
-const ProfilePage: React.FunctionComponent = () => {
+const ConnectedProfilePage: React.FunctionComponent = () => {
   return (
     <>
       <Header title="Profile" />
@@ -44,4 +46,4 @@ const ProfilePage: React.FunctionComponent = () => {
   );
 };
 
-export default ProfilePage;
+export const ProfilePage = connect(state => state)(ConnectedProfilePage)

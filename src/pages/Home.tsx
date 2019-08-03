@@ -12,23 +12,14 @@ import {
   IonListHeader,
   IonRouterLink,
   IonRow
-  } from '@ionic/react';
-import { person } from 'ionicons/icons';
-import React, { useEffect, useState } from 'react';
+  } from '@ionic/react'
+import { person } from 'ionicons/icons'
+import React from 'react'
 import { connect } from 'react-redux'
-import axios from 'axios';
 import { Header } from '../components/Header'
-import '../styles/home.scss';
+import '../styles/home.scss'
 
-const ConnectedHomePage: React.FunctionComponent = () => {
-  // TODO: Make redux work because doing this in every file is stupid
-  const [ users, setUsers ] = useState([])
-  useEffect(() => {
-    if (!users.length) {
-      axios.get('http://localhost:3000/users').then(res => setUsers(res.data))
-    }
-  })
-
+const ConnectedHomePage: React.FunctionComponent<{users: any}> = ({users}) => {
   return (
     <>
       <Header title="Say Hi" />
@@ -40,7 +31,7 @@ const ConnectedHomePage: React.FunctionComponent = () => {
             </IonButton>
           </IonRouterLink>
         </IonRow>
-        <IonCard class="welcome-card">
+        <IonCard>
           <img src="/assets/hero_travis.png" alt=""/>
           <IonCardHeader>
             <IonCardTitle>Make Connections!</IonCardTitle>
@@ -67,7 +58,7 @@ const ConnectedHomePage: React.FunctionComponent = () => {
         </IonList>
       </IonContent>
     </>
-  );
-};
+  )
+}
 
-export default connect((users: any) => users)(ConnectedHomePage);
+export const  HomePage = connect(state => state)(ConnectedHomePage)

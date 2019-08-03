@@ -1,22 +1,17 @@
 import {
   IonContent,
-  IonList,
+  IonIcon,
   IonItem,
-  IonIcon
+  IonLabel,
+  IonList
 } from '@ionic/react';
 import { person } from 'ionicons/icons'
-import React, { useEffect, useState } from 'react';
-import axios from 'axios';
+import React from 'react'
+import { connect } from 'react-redux'
 import { Header } from '../components/Header'
-import '../styles/people.scss';
+import '../styles/people.scss'
 
-const PeoplePage: React.FunctionComponent = () => {
-  const [ users, setUsers ] = useState([])
-  useEffect(() => {
-    if (!users.length) {
-      axios.get('http://localhost:3000/users').then(res => setUsers(res.data))
-    }
-  })
+const ConnectedPeoplePage: React.FunctionComponent<{users: any}> = ({users}) => {
   return (
     <>
       <Header title="People" />
@@ -26,7 +21,8 @@ const PeoplePage: React.FunctionComponent = () => {
             users.map((user: any) => (
                     <IonItem key={user.id}>
                       <IonIcon slot="start" color="dark" icon={person} />
-                      {user.first_name} {user.last_name}
+                      <IonLabel>{user.first_name} {user.last_name}</IonLabel>
+                      <IonLabel>{user.department}</IonLabel>
                     </IonItem>
             ))
           }
@@ -36,4 +32,4 @@ const PeoplePage: React.FunctionComponent = () => {
   );
 };
 
-export default PeoplePage;
+export const PeoplePage = connect(state => state)(ConnectedPeoplePage)
