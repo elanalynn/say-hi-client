@@ -4,6 +4,7 @@ import { connect } from 'react-redux'
 import { IonApp, IonPage, IonRouterOutlet, IonSplitPane } from '@ionic/react'
 import { IonReactRouter } from '@ionic/react-router'
 import axios from 'axios'
+
 import { AppPage } from './declarations'
 
 // TODO: Maybe move to barrel file?
@@ -27,9 +28,9 @@ import '@ionic/core/css/typography.css'
 import '@ionic/core/css/padding.css'
 import '@ionic/core/css/float-elements.css'
 import '@ionic/core/css/text-alignment.css'
-import '@ionic/core/css/text-transformation.css'
+// import '@ionic/core/css/text-transformation.css'
 import '@ionic/core/css/flex-utils.css'
-import '@ionic/core/css/display.css'
+// import '@ionic/core/css/display.css'
 
 const appPages: AppPage[] = [
   { title: 'Search', url: '/search', icon: search },
@@ -39,12 +40,9 @@ const appPages: AppPage[] = [
 ];
 
 const ConnectedApp: React.FunctionComponent<{dispatch: any}> = props => {
-  const apiUrl: string = process.env.API_URL || 'http://localhost:3000/users'
+  const apiUrl: string = process.env.API_URL || 'http://localhost:3000'
   useEffect(() => {
-    axios.get(apiUrl)
-    .then(res => {
-      props.dispatch({type: 'SET_USERS', payload: res.data})
-    })
+    axios.get(apiUrl).then(res => props.dispatch({type: 'SET_USERS', payload: res.data}))
   })
 
   return (

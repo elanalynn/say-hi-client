@@ -6,8 +6,7 @@ import {
   IonListHeader,
   IonRouterLink,
   IonRow,
-  IonText,
-  IonTitle
+  IonText
 } from '@ionic/react'
 import React from 'react'
 import { connect } from 'react-redux'
@@ -30,7 +29,7 @@ const ConnectedHomePage: React.FunctionComponent<{users: any}> = ({users}) => {
         <IonRow class="ion-margin ion-justify-content-center">
           <img src="/assets/hero_travis.png" alt=""/>
           <IonText class="ion-margin">Make Connections!</IonText>
-          { !!users.length && <IonText>You've connected with... 12/{users.length} Guilders</IonText>}
+          { !!users.length && <IonText>You've connected with... 12/{users.length} Guilders</IonText> }
         </IonRow>
         <IonList>
           <IonListHeader>
