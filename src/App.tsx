@@ -40,7 +40,7 @@ const appPages: AppPage[] = [
 ];
 
 const ConnectedApp: React.FunctionComponent<{dispatch: any}> = props => {
-  const apiUrl: string = 'https://say-hi-api.herokuapp.com' 
+  const apiUrl: string = 'https://say-hi-api.herokuapp.com/users' 
   useEffect(() => {
     axios.get(apiUrl).then(res => props.dispatch({type: 'SET_USERS', payload: res.data}))
   })
