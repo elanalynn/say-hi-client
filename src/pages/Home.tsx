@@ -27,7 +27,7 @@ const ConnectedHomePage: React.FunctionComponent<{users: any}> = ({users}) => {
           </IonRouterLink>
         </IonRow>
         <IonRow class="ion-margin ion-justify-content-center">
-          <img src="/assets/hero_travis.png" alt=""/>
+          <img src="/assets/hero.png" alt=""/>
           <IonText class="ion-margin">Make Connections!</IonText>
           { !!users.length && <IonText>You've connected with... 12/{users.length} Guilders</IonText> }
         </IonRow>
