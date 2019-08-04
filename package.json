@@ -3,7 +3,6 @@
   "version": "0.0.1",
   "private": true,
   "dependencies": {
-    "@guildeducationinc/recess": "^4.0.55",
     "@ionic/react": "^0.0.9",
     "@ionic/react-router": "^0.0.9",
     "@types/jest": "24.0.11",
