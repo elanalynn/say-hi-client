@@ -39,8 +39,9 @@ const appPages: AppPage[] = [
 ];
 
 const ConnectedApp: React.FunctionComponent<{dispatch: any}> = props => {
+  const apiUrl: string = process.env.API_URL || 'http://localhost:3000/users'
   useEffect(() => {
-    axios.get('http://localhost:3000/users')
+    axios.get(apiUrl)
     .then(res => {
       props.dispatch({type: 'SET_USERS', payload: res.data})
     })
